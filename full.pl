@@ -109,14 +109,13 @@ writeln(T) :- write(T), nl.
 main :-
         gpa(Gpa), /* Get GPA List */
         sat(Sat), /* Get SAT List */
-        data1(Data1), /* Get Data1 List */
         mean(Gpa, MeanG), /* Get Mean GPA */
         mean(Sat, MeanS), /* Get Mean SAT */
         stddev(Gpa, SDG), /* Get Standard Deviation of GPA */
         stddev(Sat, SDS), /* Get Standard Deviation of SAT */
-        regressiona(Gpa, Sat, A), /* Get Regression alpha parameter */
-        regressionb(Gpa, Sat, B), /* Get Regression beta parameter */
-        correlation(Gpa, Sat, R), /* Get Pearson Correlation Coefficient */
+        regressiona(Sat, Gpa, A), /* Get Regression alpha parameter */
+        regressionb(Sat, Gpa, B), /* Get Regression beta parameter */
+        correlation(Sat, Gpa, R), /* Get Pearson Correlation Coefficient */
         /* [10,11,12,14,9] */
         load_data_column('data1.csv', false, 0, ListOne), /* Load Data from CSV */
         /* [10,11,12,14,9] */
