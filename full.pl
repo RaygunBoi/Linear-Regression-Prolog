@@ -14,7 +14,7 @@ load_data_column(FileName, Header, C, List) :- %Second version of load_data_colu
     get_column(Lines, C, TempList), %Helper rule that gets the values of C from Lines and puts them into RemoveList
     maplist(atom_number, TempList, List). %Turns every element in TempList into a number and stores it in List
 
-regressiona(X, Y, A) :-
+regressiona(Y, X, A) :-
     length(X, L), %Gets the length of one of the lists and stores it in L
     sum_xy(X, Y, SumXY), %Helper rule that returns the sum of lists X and Y and stores it in SumXY
     sum_list(X, SumX), %Calculates the sum of list X and stores it in SumX
@@ -24,7 +24,7 @@ regressiona(X, Y, A) :-
     AR is (L * SumXY - SumX * SumY) / (L * SumXSquared - SquareSumX), %Calculates a and stores it in AR
     round_decimal(AR, 4, A). %Helper rule that rounds AR to 4 decimal places and stores it in A
 
-regressionb(X, Y, B) :-
+regressionb(Y, X, B) :-
     length(X, L), %Gets the length of one of the lists and stores it in L
     sum_xy(X, Y, SumXY), %Helper rule that returns the sum of lists X and Y and stores it in SumXY
     sum_list(X, SumX), %Calculates the sum of list X and stores it in SumX
@@ -37,7 +37,7 @@ regressionb(X, Y, B) :-
     BR is (SumY - A * SumX) / L, %Calculates b and stores it in BR
     round_decimal(BR, 4, B). %Helper rule that rounds BR to 4 decimal places and stores it in B
 
-correlation(X, Y, R) :-
+correlation(Y, X, R) :-
     length(X, L), %Gets the length of one of the lists and stores it in L
     sum_xy(X, Y, SumXY), %Helper rule that returns the sum of lists X and Y and stores it in SumXY
     sum_list(X, SumX), %Helper rule that returns the sum of list X and stores it in SumX
@@ -113,9 +113,9 @@ main :-
         mean(Sat, MeanS), /* Get Mean SAT */
         stddev(Gpa, SDG), /* Get Standard Deviation of GPA */
         stddev(Sat, SDS), /* Get Standard Deviation of SAT */
-        regressiona(Sat, Gpa, A), /* Get Regression alpha parameter */
-        regressionb(Sat, Gpa, B), /* Get Regression beta parameter */
-        correlation(Sat, Gpa, R), /* Get Pearson Correlation Coefficient */
+        regressiona(Gpa, Sat, A), /* Get Regression alpha parameter */
+        regressionb(Gpa, Sat, B), /* Get Regression beta parameter */
+        correlation(Gpa, Sat, R), /* Get Pearson Correlation Coefficient */
         /* [10,11,12,14,9] */
         load_data_column('data1.csv', false, 0, ListOne), /* Load Data from CSV */
         /* [10,11,12,14,9] */
